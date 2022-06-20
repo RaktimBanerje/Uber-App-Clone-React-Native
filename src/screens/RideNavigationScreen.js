@@ -44,7 +44,7 @@ const RideNavigationScreen = () => {
                 styles={inputStyles}
                 onPress={(data, details = null) => {
                     dispatch({
-                        type: "UPDATE_ORIGIN",
+                        type: "SET_ORIGIN",
                         value: {
                             location: details.geometry.location, 
                             description: data.description
@@ -70,7 +70,7 @@ const RideNavigationScreen = () => {
                 styles={inputStyles}
                 onPress={(data, details = null) => {
                     dispatch({
-                        type: "UPDATE_DESTINATION",
+                        type: "SET_DESTINATION",
                         value: {
                             location: details.geometry.location, 
                             description: data.description

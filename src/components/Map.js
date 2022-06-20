@@ -12,11 +12,27 @@ const Map = () => {
     const LATITUDE_DELTA = 0.0922
     const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO
 
-    const {state} = React.useContext(StoreContext)
+    const {state, dispatch} = React.useContext(StoreContext)
     const {initialRegion, origin, destination} = state
     const mapRef = React.useRef(null)
 
+    const convertMinsToHrsMins = (mins) => {
+        let h = Math.floor(mins / 60);
+        let m = mins % 60;
+        h = h < 10 ? '0' + h : h; // (or alternatively) h = String(h).padStart(2, '0')
+        m = m < 10 ? '0' + m : m; // (or alternatively) m = String(m).padStart(2, '0')
+        return `${h}:${m}`;
+      }
+
     const handleRoutingReady = (result) => {
+        
+        dispatch({
+            type: "SET_TRAVEL_DISTANCE_DURATION",
+            value: {
+                distance: Number(result.distance).toFixed(2),
+                duration: convertMinsToHrsMins(parseInt(result.duration))
+            }
+        })
         // console.log(`Distance: ${result.distance} km`)
         // console.log(`Duration: ${result.duration} min.`)
         mapRef.current.fitToSuppliedMarkers(["origin", "destination"], {
