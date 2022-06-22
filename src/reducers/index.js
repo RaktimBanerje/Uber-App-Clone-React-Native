@@ -27,29 +27,40 @@ export const initialState = {
 export const reducer = (state, action) => {
     switch(action.type) {
         case "SET_ORIGIN": {
-            state.origin.location.latitude = action.value.location.lat
-            state.origin.location.longitude = action.value.location.lng
-            state.origin.description = action.value.description
-            
-            console.log(state)
-            return state
+            console.log("SET_ORIGIN")
+            return {
+                ...state, 
+                origin: {
+                    description: action.payload.description,
+                    location: {
+                        latitude: action.payload.location.lat,
+                        longitude: action.payload.location.lng
+                    }
+                }
+            }
         }
         case "SET_DESTINATION": {
-            state.destination.location.latitude = action.value.location.lat
-            state.destination.location.longitude = action.value.location.lng
-            state.destination.description = action.value.description
-
-            console.log(state)
-            return state
+            console.log("SET_DESTINATION")
+            return {
+                ...state,
+                destination: {
+                    description: action.payload.description,
+                    location: {
+                        latitude: action.payload.location.lat,
+                        longitude: action.payload.location.lng
+                    }
+                }
+            }
         }
         case "SET_TRAVEL_DISTANCE_DURATION": {
-            state.distance = action.value.distance
-            state.duration = action.value.duration
-            console.log(state)
-            return state
+            console.log("SET_TRAVEL_DISTANCE_DURATION")
+            return {
+                ...state,
+                distance: action.payload.distance,
+                duration: action.payload.duration
+            }
         }
         default: {
-            console.log(state)
             return state
         }
     }

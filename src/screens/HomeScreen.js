@@ -1,10 +1,13 @@
 import React from 'react'
 import SafeAreaView from 'react-native-safe-area-view'
 import { StyleSheet, Image, View, TouchableOpacity, FlatList } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 import { Text, Button } from '@rneui/base'
-import { Ionicons } from '@expo/vector-icons'; 
+import { Ionicons } from '@expo/vector-icons' 
 
-const HomeScreen = ({navigation}) => {
+const HomeScreen = () => {
+
+    const navigation = useNavigation()
 
     const services = [
         {
@@ -20,29 +23,6 @@ const HomeScreen = ({navigation}) => {
             screen: "Eat"
         },
     ]
-
-    const Service = ({item, index}) => {
-
-        const pressHandler = () => {
-            navigation.navigate(item.screen)
-        }
-
-        return (
-            <TouchableOpacity style={styles.box} activeOpacity={0.5} key={item.id} onPress={pressHandler}>
-                <Image source={item.image} style={styles.boxImage} />
-                <View style={styles.boxContent}>
-                    <Text h4>{item.title}</Text>
-                    <Ionicons name="arrow-forward-circle" size={40} color="black" />
-                </View>
-            </TouchableOpacity>
-        )
-    }
-    
-    const ItemSeparatorComponent = () => {
-        return (
-            <View style={{width: 10}}></View>
-        )
-    }
     
     const styles = StyleSheet.create({
         container: {
@@ -86,6 +66,29 @@ const HomeScreen = ({navigation}) => {
         },
     })
 
+    const Service = ({item}) => {
+
+        const pressHandler = () => {
+            navigation.navigate(item.screen)
+        }
+
+        return (
+            <TouchableOpacity style={styles.box} activeOpacity={0.5} key={item.id} onPress={pressHandler}>
+                <Image source={item.image} style={styles.boxImage} />
+                <View style={styles.boxContent}>
+                    <Text h4>{item.title}</Text>
+                    <Ionicons name="arrow-forward-circle" size={40} color="black" />
+                </View>
+            </TouchableOpacity>
+        )
+    }
+    
+    const ItemSeparatorComponent = () => {
+        return (
+            <View style={{width: 10}}></View>
+        )
+    }
+
     return (
         <SafeAreaView style={styles.container}>
            
@@ -112,6 +115,7 @@ const HomeScreen = ({navigation}) => {
                 title="Enter your pick up point"
                 size="lg"
                 color="black"
+                onPress={() => navigation.navigate("Ride")}
             />
     
         </SafeAreaView>

@@ -45,13 +45,13 @@ const RideNavigationScreen = () => {
                 onPress={(data, details = null) => {
                     dispatch({
                         type: "SET_ORIGIN",
-                        value: {
+                        payload: {
                             location: details.geometry.location, 
                             description: data.description
                         }
                     })
 
-                    state.destination.description && navigation.navigate("RideCar")
+                    state.destination.description && navigation.navigate("RideOption")
                 }}
             />
 
@@ -71,13 +71,13 @@ const RideNavigationScreen = () => {
                 onPress={(data, details = null) => {
                     dispatch({
                         type: "SET_DESTINATION",
-                        value: {
+                        payload: {
                             location: details.geometry.location, 
                             description: data.description
                         }
                     })
 
-                    state.origin.description && navigation.navigate("RideCar")
+                    state.origin.description && navigation.navigate("RideOption")
                 }}
             />
         </View>

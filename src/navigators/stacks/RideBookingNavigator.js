@@ -2,7 +2,7 @@ import React from 'react'
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 
 import RideNavigationScreen from '../../screens/RideNavigationScreen'
-import RideCarScreen from '../../screens/RideCarScreen'
+import RideOptionScreen from '../../screens/RideOptionScreen'
 
 const RideNavigator = () => {
 
@@ -15,7 +15,7 @@ const RideNavigator = () => {
             }}
         >
             <Stack.Screen name="RideNavigation" component={RideNavigationScreen} />
-            <Stack.Screen name="RideCar" component={RideCarScreen} />
+            <Stack.Screen name="RideOption" component={RideOptionScreen} />
             
         </Stack.Navigator>
     )

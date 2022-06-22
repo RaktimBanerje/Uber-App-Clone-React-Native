@@ -3,8 +3,11 @@ import SafeAreaView from 'react-native-safe-area-view'
 import { StyleSheet, View } from 'react-native'
 import Map from '../components/Map'
 import RideBookingNavigator from '../navigators/stacks/RideBookingNavigator'
+import { StoreContext } from '../../App'
 
 const RideScreen = () => {
+
+    const {state} = React.useContext(StoreContext)
 
     const styles = StyleSheet.create({
         container: {
@@ -21,7 +24,7 @@ const RideScreen = () => {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.mapContainer}>
-                <Map />
+                <Map {...state} />
             </View>
             <View style={styles.formContainer}>
                 <RideBookingNavigator />
