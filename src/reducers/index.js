@@ -1,7 +1,9 @@
 import React from 'react'
 
 export const initialState = {
-    user: {},
+    user: {
+        name: "Raktim Banerjee"
+    },
     initialRegion: {
         latitude: 51.5078788,
         longitude: -0.08773210000000001
@@ -21,7 +23,9 @@ export const initialState = {
         }
     },
     distance: undefined,
-    duration: undefined
+    duration: undefined,
+    isProfileScreenOpen: false,
+    numberOfMessages: null
 }
 
 export const reducer = (state, action) => {
@@ -58,6 +62,18 @@ export const reducer = (state, action) => {
                 ...state,
                 distance: action.payload.distance,
                 duration: action.payload.duration
+            }
+        }
+        case "PROFILE_SCREEN_OPEN": {
+            return {
+                ...state,
+                isProfileScreenOpen: true
+            }
+        }
+        case "PROFILE_SCREEN_CLOSE": {
+            return {
+                ...state,
+                isProfileScreenOpen: false
             }
         }
         default: {

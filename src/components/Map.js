@@ -1,10 +1,9 @@
 import React from 'react'
-import { isEqual } from 'lodash'
 import MapView from 'react-native-maps'
-import { StoreContext } from '../../App'
 import { Dimensions } from 'react-native'
 import MyMapViewDirection from './MyMapViewDirection'
 import MyMarker from './MyMarker'
+import { isEqual } from 'lodash'
 
 const Map = (props) => {
 
@@ -12,8 +11,6 @@ const Map = (props) => {
     const ASPECT_RATIO = width / height
     const LATITUDE_DELTA = 0.0922
     const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO
-
-    // let {state} = React.useContext(StoreContext)
     
     const {initialRegion, origin, destination} = props
     const mapRef = React.useRef(null)
