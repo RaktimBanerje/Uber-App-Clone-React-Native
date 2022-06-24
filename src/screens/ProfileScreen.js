@@ -74,7 +74,7 @@ const ProfileScreen = () => {
         },
         otherFeatureText: {
             fontWeight: "bold",
-            fontSize: 20, 
+            fontSize: 17, 
             marginLeft: 30
         },
         badgeContainerStyle: {
@@ -116,7 +116,7 @@ const ProfileScreen = () => {
                 <View style={{flex: 0.01, backgroundColor: "whitesmoke"}}></View>
                 <View style={styles.section2}>
                     <View style={styles.otherFeature}>
-                        <MaterialIcons name="message" size={20} color="black" />
+                        <MaterialIcons name="message" size={17} color="black" />
                         <Text style={styles.otherFeatureText}>Messages</Text>
                         <Badge 
                             status="primary"
@@ -125,15 +125,15 @@ const ProfileScreen = () => {
                         />
                     </View>
                     <View style={styles.otherFeature}>
-                        <Fontisto name="shopping-package" size={20} color="black" />
+                        <Fontisto name="shopping-package" size={17} color="black" />
                         <Text style={styles.otherFeatureText}>Gifts</Text>
                     </View>
                     <View style={styles.otherFeature}>
-                        <Ionicons name="settings-sharp" size={20} color="black" />
+                        <Ionicons name="settings-sharp" size={17} color="black" />
                         <Text style={styles.otherFeatureText}>Settings</Text>
                     </View>
                     <View style={styles.otherFeature}>
-                        <Ionicons name="information-circle" size={20} color="black" />
+                        <Ionicons name="information-circle" size={17} color="black" />
                         <Text style={styles.otherFeatureText}>Legal</Text>
                     </View>
                 </View>

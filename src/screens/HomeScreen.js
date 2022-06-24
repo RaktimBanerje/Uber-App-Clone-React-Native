@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native'
 import { Text, Button, Badge } from '@rneui/base'
 import { Ionicons } from '@expo/vector-icons'
 import { EvilIcons } from '@expo/vector-icons'
+import { AntDesign } from '@expo/vector-icons'
 import { StoreContext } from '../../App'
 
 const HomeScreen = () => {
@@ -44,12 +45,9 @@ const HomeScreen = () => {
             marginHorizontal: 6,
             flex: 0.1
         },
-        // mapContainer: {
-        //     flex: 0.5,
-        // },  
         serviceContainer: {
             // flex: 0.4,
-            flex: 0.7, 
+            flex: 0.4, 
             flexDirection: "row", 
             justifyContent: 'space-around'
         },
@@ -78,6 +76,16 @@ const HomeScreen = () => {
             position: "absolute",
             bottom: 17, 
             right: 26,
+        },
+        textInputContainer: {
+            flex: 0.4,
+            marginHorizontal: 22,
+            paddingBottom: 0
+        },
+        textInput: {
+            backgroundColor: "#DDDDDDDF",
+            borderRadius: 0,
+            fontSize: 18
         }
     })
 
@@ -122,8 +130,6 @@ const HomeScreen = () => {
             <View style={styles.textContainer}>
                 <Text h1>Uber</Text>
             </View>
-            
-            {/* <View style={styles.mapContainer}></View> */}
            
             <View style={styles.serviceContainer}> 
                 <FlatList 
@@ -136,15 +142,52 @@ const HomeScreen = () => {
                     showsHorizontalScrollIndicator={false}
                 />
             </View>
-            
-            <Button 
-                containerStyle={styles.buttonContainerStyle}
-                title="Enter your pick up point"
-                size="lg"
-                color="black"
+
+            <TouchableOpacity 
+                style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    borderWidth: 1,
+                    borderStyle: "solid",
+                    borderColor: "#DDDDDDDF",
+                    borderRadius: 50,
+                    height: 55,
+                    backgroundColor: "#DDDDDDDF",
+                    justifyContent: "space-between",
+                    paddingHorizontal: 20,
+                }}
+                activeOpacity={1}
                 onPress={() => navigation.navigate("Ride")}
-            />
-    
+            >
+                <View style={{
+                    borderRightWidth: 1, 
+                    borderRightStyle: "solid", 
+                    borderRightColor: "grey",
+                    paddingRight: 20
+                }}>
+                    <Text style={{color: "grey", fontSize: 16, fontWeight: "bold"}}>Enter pick-up point</Text>
+                </View>
+                <TouchableOpacity
+                    activeOpacity={1}
+                    onPress={() => dispatch({type: "SCHEDULE_MODAL_OPEN"})}
+                >
+                    <View style={{
+                        flexDirection: "row",
+                        backgroundColor: "white",
+                        borderWidth: 1,
+                        borderStyle: "solid",
+                        borderRadius: 50,
+                        borderColor: "transparent",
+                        paddingHorizontal: 13,
+                        paddingVertical: 6
+                    }}>
+                        <AntDesign name="clockcircle" size={20} color="black"/>
+                        <Text style={{paddingHorizontal: 6}}>Now</Text>
+                        <AntDesign name="caretdown" size={12} color="black" style={{alignSelf: "center"}} />
+                    </View>
+                </TouchableOpacity>
+            </TouchableOpacity>
+            
         </SafeAreaView>
     )
 }

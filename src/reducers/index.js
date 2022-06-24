@@ -24,7 +24,9 @@ export const initialState = {
     },
     distance: undefined,
     duration: undefined,
+    dateTime: new Date(),
     isProfileScreenOpen: false,
+    isSceduleModalOpen: true,
     numberOfMessages: null
 }
 
@@ -74,6 +76,18 @@ export const reducer = (state, action) => {
             return {
                 ...state,
                 isProfileScreenOpen: false
+            }
+        }
+        case "SCHEDULE_MODAL_OPEN": {
+            return {
+                ...state,
+                isSceduleModalOpen: true
+            }
+        }
+        case "SCHEDULE_MODAL_CLOSE": {
+            return {
+                ...state,
+                isSceduleModalOpen: false
             }
         }
         default: {
