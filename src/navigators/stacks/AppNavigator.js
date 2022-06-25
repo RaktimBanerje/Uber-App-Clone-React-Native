@@ -1,8 +1,8 @@
 import React from 'react'
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 
-import RideNavigator from './RideNavigator'
 import HomeScreen from '../../screens/HomeScreen'
+import TripScreen from '../../screens/Trip/TripScreen'
 
 const AppNavigator = () => {
 
@@ -15,7 +15,7 @@ const AppNavigator = () => {
             }}
         >
             <Stack.Screen name="Home" component={HomeScreen} />
-            <Stack.Screen name="Ride" component={RideNavigator} />
+            <Stack.Screen name="Trip" component={TripScreen} />
         </Stack.Navigator>
     )
 }

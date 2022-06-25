@@ -1,93 +1,84 @@
 import React from 'react'
+import { Coords } from '../class/Coords'
+import { Location } from '../class/Location'
+import { Trip } from '../class/Trip'
+
+const user = {
+    name: "Raktim Banerjee"
+}
+
+class User {
+    constructor(name) {
+        this.name = name
+    }
+}
+
+const initialUser = new User("Raktim Banerjee")
 
 export const initialState = {
-    user: {
-        name: "Raktim Banerjee"
-    },
-    initialRegion: {
-        latitude: 51.5078788,
-        longitude: -0.08773210000000001
-    },
-    origin: {
-        description: undefined,
-        location: {
-            latitude: undefined,
-            longitude: undefined
-        }
-    },
-    destination: {
-        description: undefined,
-        location: {
-            latitude: undefined,
-            longitude: undefined
-        }
-    },
-    distance: undefined,
-    duration: undefined,
-    dateTime: new Date(),
-    isProfileScreenOpen: false,
-    isSceduleModalOpen: true,
+    user: initialUser,
+    trips: [],
+    initialRegion: new Coords(51.5078788, -0.08773210000000001),
+    selectedTrip: undefined,
+    currentDateTime: new Date(),
+    isProfileModalOpen: false,
+    isSceduleModalOpen: false,
     numberOfMessages: null
 }
 
 export const reducer = (state, action) => {
+    console.log(action.type)
     switch(action.type) {
-        case "SET_ORIGIN": {
-            console.log("SET_ORIGIN")
+        case "NEW_TRIP_CREATED": {
             return {
-                ...state, 
-                origin: {
-                    description: action.payload.description,
-                    location: {
-                        latitude: action.payload.location.lat,
-                        longitude: action.payload.location.lng
-                    }
-                }
+                ...state,
+                selectedTrip: new Trip(
+                    new Location(undefined, new Coords(undefined, undefined)),
+                    new Location(undefined, new Coords(undefined, undefined)),
+                    undefined,
+                    undefined,
+                    new Date()
+                )
+            }
+        }
+        case "SET_ORIGIN": {
+            return {
+                ...state,
+                selectedTrip: {
+                    ...state.selectedTrip,
+                    origin: action.payload
+                } 
             }
         }
         case "SET_DESTINATION": {
-            console.log("SET_DESTINATION")
             return {
                 ...state,
-                destination: {
-                    description: action.payload.description,
-                    location: {
-                        latitude: action.payload.location.lat,
-                        longitude: action.payload.location.lng
-                    }
-                }
+                selectedTrip: {
+                    ...state.selectedTrip,
+                    destination: action.payload
+                } 
             }
         }
         case "SET_TRAVEL_DISTANCE_DURATION": {
-            console.log("SET_TRAVEL_DISTANCE_DURATION")
             return {
                 ...state,
-                distance: action.payload.distance,
-                duration: action.payload.duration
+                selectedTrip: {
+                    ...state.selectedTrip,
+                    distance: action.payload.distance,
+                    duration: action.payload.duration
+                }
             }
         }
-        case "PROFILE_SCREEN_OPEN": {
+        case "PROFILE_SCREEN_TOGGLE": {
             return {
                 ...state,
-                isProfileScreenOpen: true
+                isProfileModalOpen: !state.isProfileModalOpen
             }
         }
-        case "PROFILE_SCREEN_CLOSE": {
+        case "SCHEDULE_MODAL_TOGGLE": {
             return {
                 ...state,
-                isProfileScreenOpen: false
-            }
-        }
-        case "SCHEDULE_MODAL_OPEN": {
-            return {
-                ...state,
-                isSceduleModalOpen: true
-            }
-        }
-        case "SCHEDULE_MODAL_CLOSE": {
-            return {
-                ...state,
-                isSceduleModalOpen: false
+                isSceduleModalOpen: !state.isSceduleModalOpen
             }
         }
         default: {

@@ -18,9 +18,9 @@ const HomeScreen = () => {
     const services = [
         {
             id: 1,
-            title: "Get a ride",
+            title: "Get a Trip",
             image: require("../../assets/cars/UberGo.png"),
-            screen: "Ride"
+            screen: "Trip"
         },
         {
             id: 2,
@@ -124,7 +124,7 @@ const HomeScreen = () => {
                         containerStyle={styles.badgeContainerStyle}
                     />
                 }                       
-                <EvilIcons name="user" size={40} color="black" onPress={() => dispatch({type: "PROFILE_SCREEN_OPEN"})} />
+                <EvilIcons name="user" size={40} color="black" onPress={() => dispatch({type: "PROFILE_SCREEN_TOGGLE"})} />
             </View>
            
             <View style={styles.textContainer}>
@@ -157,7 +157,7 @@ const HomeScreen = () => {
                     paddingHorizontal: 20,
                 }}
                 activeOpacity={1}
-                onPress={() => navigation.navigate("Ride")}
+                onPress={() => navigation.navigate("Trip")}
             >
                 <View style={{
                     borderRightWidth: 1, 
@@ -169,7 +169,7 @@ const HomeScreen = () => {
                 </View>
                 <TouchableOpacity
                     activeOpacity={1}
-                    onPress={() => dispatch({type: "SCHEDULE_MODAL_OPEN"})}
+                    onPress={() => dispatch({type: "SCHEDULE_MODAL_TOGGLE"})}
                 >
                     <View style={{
                         flexDirection: "row",

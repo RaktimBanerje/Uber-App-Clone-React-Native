@@ -5,14 +5,14 @@ import MyMapViewDirection from './MyMapViewDirection'
 import MyMarker from './MyMarker'
 import { isEqual } from 'lodash'
 
-const Map = (props) => {
+const Map = ({initialRegion, trip}) => {
 
     const { width, height } = Dimensions.get('window')
     const ASPECT_RATIO = width / height
     const LATITUDE_DELTA = 0.0922
     const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO
     
-    const {initialRegion, origin, destination} = props
+    const {origin, destination} = trip
     const mapRef = React.useRef(null)
 
     React.useEffect(() => {
@@ -41,8 +41,8 @@ const Map = (props) => {
                 flex: 1
             }}
             region={{
-                latitude: origin.location.latitude || initialRegion.latitude,
-                longitude: origin.location.longitude || initialRegion.longitude,
+                latitude: origin.coords.latitude || initialRegion.latitude,
+                longitude: origin.coords.longitude || initialRegion.longitude,
                 latitudeDelta: LATITUDE_DELTA,
                 longitudeDelta: LONGITUDE_DELTA,
             }}
@@ -53,14 +53,14 @@ const Map = (props) => {
                 origin.description && 
                 destination.description && 
                 <MyMapViewDirection 
-                    origin={origin.location} 
-                    destination={destination.location} 
+                    origin={origin.coords} 
+                    destination={destination.coords} 
                 />
             }
             
             {
-                origin.location.latitude && 
-                origin.location.longitude && 
+                origin.coords.latitude && 
+                origin.coords.longitude && 
                 <MyMarker 
                     place={origin}
                     identifier="origin"
@@ -68,8 +68,8 @@ const Map = (props) => {
             }
 
             {
-                destination.location.latitude && 
-                destination.location.longitude && 
+                destination.coords.latitude && 
+                destination.coords.longitude && 
                 <MyMarker 
                     place={destination}
                     identifier="destination"
@@ -79,15 +79,11 @@ const Map = (props) => {
     )
 }
 
-const areEqual = (prevProps, nextProps) => {
-
-    let isOriginEqual = isEqual(prevProps.origin, nextProps.origin)
-    let isDestinationEqual = isEqual(prevProps.destination, nextProps.destination)
-
-    if(isOriginEqual && isDestinationEqual)
-        return true
-    else    
-        return false
+const areEqual = (prevProps, nextProps) => { 
+    return (
+        isEqual(prevProps.trip.origin, nextProps.trip.origin) &&
+        isEqual(prevProps.trip.destination, nextProps.trip.destination)
+    ) 
 } 
 
 export default React.memo(Map, areEqual)

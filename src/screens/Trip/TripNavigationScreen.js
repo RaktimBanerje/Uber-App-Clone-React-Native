@@ -2,14 +2,17 @@ import React from 'react'
 import { StyleSheet, View } from 'react-native'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
 import { GOOGLE_MAP_API_KEY } from "@env"
-import { StoreContext } from '../../App'
+import { Coords } from '../../class/Coords'
+import { Location } from '../../class/Location'
+import { StoreContext } from '../../../App'
 import { useNavigation } from '@react-navigation/native'
 
-const RideNavigationScreen = () => {
+const TripNavigationScreen = () => {
 
     const navigation = useNavigation()
 
     const {state, dispatch} = React.useContext(StoreContext)
+    const {selectedTrip} = state
 
     const inputStyles = StyleSheet.create({
         container: {
@@ -45,13 +48,16 @@ const RideNavigationScreen = () => {
                 onPress={(data, details = null) => {
                     dispatch({
                         type: "SET_ORIGIN",
-                        payload: {
-                            location: details.geometry.location, 
-                            description: data.description
-                        }
+                        payload: new Location(
+                            data.description,
+                            new Coords (
+                                details.geometry.location.lat, 
+                                details.geometry.location.lng
+                            )
+                        )
                     })
 
-                    state.destination.description && navigation.navigate("RideOption")
+                    selectedTrip.destination.description && navigation.navigate("TripOption")
                 }}
             />
 
@@ -71,17 +77,20 @@ const RideNavigationScreen = () => {
                 onPress={(data, details = null) => {
                     dispatch({
                         type: "SET_DESTINATION",
-                        payload: {
-                            location: details.geometry.location, 
-                            description: data.description
-                        }
+                        payload: new Location(
+                            data.description,
+                            new Coords (
+                                details.geometry.location.lat, 
+                                details.geometry.location.lng
+                            )
+                        )
                     })
 
-                    state.origin.description && navigation.navigate("RideOption")
+                    selectedTrip.origin.description && navigation.navigate("TripOption")
                 }}
             />
         </View>
     )
 }
 
-export default RideNavigationScreen
+export default TripNavigationScreen

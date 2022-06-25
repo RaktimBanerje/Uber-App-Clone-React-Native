@@ -10,15 +10,15 @@ import { Fontisto } from '@expo/vector-icons';
 import { StoreContext } from '../../App'
 import { StyleSheet, View } from 'react-native'
 
-const ProfileScreen = () => {
+const ProfileModal = () => {
 
     const {state, dispatch} = React.useContext(StoreContext)
 
-    const {isProfileScreenOpen, numberOfMessages, user} = state
+    const {isProfileModalOpen, numberOfMessages, user} = state
     
     const closeModal = () => {
         dispatch({
-            type: "PROFILE_SCREEN_CLOSE"
+            type: "PROFILE_SCREEN_TOGGLE"
         })
     }
 
@@ -85,7 +85,7 @@ const ProfileScreen = () => {
 
     return (
         <Modal
-            isVisible={isProfileScreenOpen}
+            isVisible={isProfileModalOpen}
             coverScreen={true}
             hasBackdrop={false}
             onBackButtonPress={closeModal}
@@ -142,4 +142,4 @@ const ProfileScreen = () => {
     )
 }
 
-export default ProfileScreen
+export default ProfileModal

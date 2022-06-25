@@ -6,10 +6,10 @@ import { StoreContext } from '../../App'
 import { addMinutes, format } from 'date-fns'
 import DateTimePicker from '@react-native-community/datetimepicker'
 
-const RideSchedule = () => {
+const ScheduleModal = () => {
 
     const {state, dispatch} = React.useContext(StoreContext)
-    const [tripSchedule, setTripSchedule] = React.useState(state.dateTime)
+    const [tripSchedule, setTripSchedule] = React.useState(state.currentDateTime)
     const [mode, setMode] = React.useState("date")
     const [display, setDisplay] = React.useState(false)
 
@@ -30,7 +30,7 @@ const RideSchedule = () => {
 
     const closeModal = () => {
         setDisplay(false)
-        dispatch({type: "SCHEDULE_MODAL_CLOSE"})
+        dispatch({type: "SCHEDULE_MODAL_TOGGLE"})
     }
 
     const styles = StyleSheet.create({
@@ -57,22 +57,23 @@ const RideSchedule = () => {
                 swipeDirection={"down"}
                 swipeThreshold={50}
                 onSwipeComplete={closeModal}
+                onBackdropPress={closeModal}
                 onBackButtonPress={closeModal}
                 style={styles.modalStyle}
             >
-                <View style={{flex: 0.5, backgroundColor: "white"}}>
+                <View style={{flex: 0.4, backgroundColor: "white"}}>
                     <View style={styles.textWrapper}>
                         <Text h3 h3Style={styles.textStyle}>Schedule a trip</Text>
                     </View>
 
                     <TouchableOpacity activeOpacity={1} style={styles.textWrapper} onPress={showDatePicker}>
-                        <Text h3 h3Style={styles.textStyle}>
+                        <Text h4 h4Style={styles.textStyle}>
                             {format(tripSchedule, "iii, dd MMM")}
                         </Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity activeOpacity={1} style={styles.textWrapper} onPress={showTimePicker}>
-                        <Text h3 h3Style={styles.textStyle}>
+                        <Text h4 h4Style={styles.textStyle}>
                             {format(tripSchedule, "p")} - {format(addMinutes(tripSchedule, 10), "p")}
                         </Text>
                     </TouchableOpacity>
@@ -93,7 +94,7 @@ const RideSchedule = () => {
                 <DateTimePicker 
                     mode={mode}
                     value={tripSchedule}
-                    minimumDate={state.dateTime}
+                    minimumDate={state.currentDateTime}
                     onChange={onSchduleChange}
                 />
             }
@@ -103,4 +104,4 @@ const RideSchedule = () => {
   )
 }
 
-export default RideSchedule
+export default ScheduleModal
