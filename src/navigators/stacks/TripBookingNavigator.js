@@ -16,10 +16,11 @@ const TripBookingNavigator = () => {
                 headerShown: false
             }}
         >
-            <Stack.Screen name="TripReady" component={TripReadyScreen} />
+            {/* <Stack.Screen name="TripReady" component={TripReadyScreen} /> */}
             <Stack.Screen name="TripNavigation" component={TripNavigationScreen} />
             <Stack.Screen name="TripOption" component={TripOptionScreen} />
-            {/* <Stack.Screen name="TripConfirm" component={TripConfirmScreen} /> */}
+            <Stack.Screen name="TripConfirm" component={TripConfirmScreen} />
+            <Stack.Screen name="TripReady" component={TripReadyScreen} />
         </Stack.Navigator>
     )
 }

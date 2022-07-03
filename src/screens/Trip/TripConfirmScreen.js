@@ -54,6 +54,7 @@ const TripConfirmScreen = ({route, navigation}) => {
                 color="black"
                 buttonStyle={{height: "100%"}}
                 titleStyle={{fontSize: 20}}
+                onPress={()=> navigation.navigate("TripReady")}
               />
             </View>
             <View style={{width: "20%"}}>

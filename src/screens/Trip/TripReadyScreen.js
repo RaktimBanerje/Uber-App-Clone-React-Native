@@ -1,8 +1,9 @@
-import { Avatar, Badge, Button, Input, Text } from '@rneui/base'
+import { Avatar, Button, Input, Text } from '@rneui/base'
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
-import { MaterialIcons } from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons'
+import { AntDesign } from '@expo/vector-icons'
+import { Entypo } from '@expo/vector-icons'
 
 const TripReadyScreen = () => {
 
@@ -15,7 +16,8 @@ const TripReadyScreen = () => {
     })
 
     const driver = {
-        name: "Biswajit"
+        name: "Cathenna",
+        totalTrips: "4,028"
     }
 
     return (
@@ -50,14 +52,19 @@ const TripReadyScreen = () => {
                     <Text style={{fontSize: 15, fontWeight: "bold"}}>White Hyundai Eon</Text>
                 </View>
             </View>
-            <View style={{ flex: 0.1, justifyContent: "center" }}>
+            <View style={{ flex: 0.1, flexDirection: "row", justifyContent: "center" }}>
+                <Text style={{textAlign: "center", fontSize: 17, fontWeight: "bold", color: "dodgerblue" }}>{driver.name}</Text>
+                <Entypo name="dot-single" size={24} color="black" />
+                <Text style={{fontSize: 17, fontWeight: "bold"}}>{driver.totalTrips} Trips</Text>
             </View>
-            <View style={{ flex: 0.3, flexDirection: "row", justifyContent: "space-between", alignItems: "flex-end" }}>
+            <View style={{ flex: 0.3, flexDirection: "row", justifyContent: "space-between" }}>
                 <Input
                     containerStyle={{
+                        alignSelf: "center",
                         width: "82%"
                     }}
                     inputContainerStyle={{
+                        marginTop: 25,
                         backgroundColor: "#eeeeee",
                         borderWidth: 1,
                         borderColor: "#eeeeee",
